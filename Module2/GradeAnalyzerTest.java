@@ -25,7 +25,6 @@ public class GradeAnalyzerTest {
  
     @Test
     void calculateAverage_returnsDouble_notInteger() { 
-        // 1 + 2 = 3, divided by 2 = 1.5, not 1
         ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(1, 2)); 
         assertEquals(1.5, GradeAnalyzer.calculateAverage(scores)); 
     } 
@@ -34,5 +33,19 @@ public class GradeAnalyzerTest {
     void calculateAverage_handlesAllSameValues() { 
         ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(88, 88, 88)); 
         assertEquals(88.0, GradeAnalyzer.calculateAverage(scores)); 
+    }
+
+    @Test
+    void calculateAverage_returnsExactAverage_forTenScores() {
+        ArrayList<Integer> scores = new ArrayList<>(
+            Arrays.asList(88, 92, 76, 45, 100, 63, 81, 57, 94, 72)
+        );
+        assertEquals(76.8, GradeAnalyzer.calculateAverage(scores), 0.01);
+    }
+
+    @Test
+    void calculateAverage_handlesNonTerminatingDecimal() {
+        ArrayList<Integer> scores = new ArrayList<>(Arrays.asList(10, 10, 11));
+        assertEquals(10.33, GradeAnalyzer.calculateAverage(scores), 0.01);
     }
 }
